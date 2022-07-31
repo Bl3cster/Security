@@ -4,49 +4,49 @@
     <meta charset="UTF-8">
     <title>Edit User</title>
 </head>
-<body>
-<form  th:method="POST" th:action="@{/admin/edit}" th:object="${user}">
+<body bgcolor="#00bfff">
+<div align="center">
+    <h2>EDIT USERS</h2>
+    <br>
+    <br>
+    <form th:method="POST" th:action="@{/admin/edit}" th:object="${user}">
+        <table border="1" style="background-color: gold;" cellspacing="7">
+            <tr>
+                <th th:width="200"><label for="name">Enter name: </label></th>
+                <th th:width="200"><label for="surname">Enter surname: </label></th>
+                <th th:width="200"><label for="email">Enter email: </label></th>
+                <th th:width="70"><label for="age">Enter age: </label></th>
+                <th th:width="200"><label for="username">Enter username</label></th>
+                <th th:widnth="300"> <label for="password">Enter password</label></th>
+                <th th:width="150">Select Role:</th>
+            </tr>
+            <input type="hidden" th:field="*{userId}" th:value="user.userId">
+            <tr>
+                <td> <input type="text" th:field="*{name}" id="name"/>
+            </td>
+                <td><input type="text" th:field="*{surname}" id="surname"/></td>
 
-    <input type="hidden" th:field="*{userId}" th:value="user.userId">
-    <br/>
-    <br/>
-    <label for="name">Enter name: </label>
-    <input type="text" th:field="*{name}" id="name"/>
-    <br/>
-    <br/>
-    <label for="surname">Enter surname: </label>
-    <input type="text" th:field="*{surname}" id="surname"/>
-    <br/>
-    <br/>
-    <label for="email">Enter email: </label>
-    <input type="text" th:field="*{email}" id="email"/>
-    <br/>
-    <br/>
-    <label for="age">Enter age: </label>
-    <input type="text" th:field="*{age}" id="age"/>
-    <br>
-    <br>
-    <label for="username">Enter username</label>
-    <input type="text" th:field="*{username}" id="username">
-    <br/>
-    <br/>
-    <label for="password">Enter password</label>
-    <input type="text" th:field="*{password}" id="password">
-    <br>
-    <br>
-    <label>Roles:
-        <select size="2" multiple name="role" required="required">
-            <option selected="selected" value="1">User</option>
-            <option value="2">Admin</option>
-        </select>
-    </label>
+                <td><input type="text" th:field="*{email}" id="email"/></td>
 
-    <br/>
-    <br/>
-    <input type="submit" value="edit User" />
-    <br>
-    <br>
-    <a href="/index">Выйти</a>
-</form>
+                <td><input type="text" th:field="*{age}" id="age"/></td>
+
+                <td><input type="text" th:field="*{username}" id="username"></td>
+
+                <td><input type="text" th:field="*{password}" id="password"></td>
+                <td><label>
+                <select size="2" multiple name="role" required="required">
+                    <option selected="selected" value="1">User</option>
+                    <option value="2">Admin</option>
+                </select>
+                </label></td> </tr>
+        </table>
+        <br>
+        <br>
+        <input type="submit" value="edit User"/>
+        <br>
+        <br>
+        <a href="/index"><font size="+2" color="#006400">Выйти</font></a>
+    </form>
+</div>
 </body>
 </html>

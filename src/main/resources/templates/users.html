@@ -3,49 +3,52 @@
 <head>
     <meta charset="UTF-8">
 </head>
-<body>
-<h2>USERS</h2>
-<br>
-<br>
-
-<table border="1">
-    <tr>
-        <th th:width="200">Name</th>
-        <th th:width="200">Surname</th>
-        <th th:width="200">Email</th>
-        <th th:width="70">Age</th>
-        <th th:width="200">Username</th>
-        <th th:width="300">Password</th>
-        <th th:width="150">Edit/Delete</th>
-    </tr>
+<body bgcolor="#00bfff">
+<div align="center">
+    <h2>USERS</h2>
+    <br>
+    <br>
 
 
-    <tr th:each="user : ${users}">
-        <td th:utext="${user.name}">Name</td>
-        <td th:utext="${user.surname}">Surname</td>
-        <td th:utext="${user.email}">Email</td>
-        <td th:utext="${user.age}">Age</td>
-        <td th:utext="${user.username}">Username</td>
-        <td th:utext="${user.password}">Password</td>
-        <td>
-            <form th:action="@{'/admin/edit/' + ${user.userId}}">
-                <input type="submit"  value="edit"/>
-            </form>
-            <form th:method="DELETE" th:action="@{'/admin/delete/' + ${user.userId}}">
-                <input type="submit"  value="delete">
-            </form>
-        </td>
-    </tr>
-
-</table>
-<br>
-
-<a href="/admin/add">Add new user</a>
-
-<br>
-<br>
-<a href="/index">Выйти</a>
+    <table border="1" style="background-color: gold;" cellspacing="7">
+        <tr>
+            <th th:width="200">Name</th>
+            <th th:width="200">Surname</th>
+            <th th:width="200">Email</th>
+            <th th:width="70">Age</th>
+            <th th:width="200">Username</th>
+            <th th:width="150">Edit/Delete</th>
+        </tr>
 
 
+        <tr th:each="user : ${users}">
+            <td align="center" size="+2" th:utext="${user.name}">Name</td>
+            <td align="center" size="+2" th:utext="${user.surname}">Surname</td>
+            <td align="center" size="+2" th:utext="${user.email}">Email</td>
+            <td align="center" size="+2" th:utext="${user.age}">Age</td>
+            <td align="center" size="+2" th:utext="${user.username}">Username</td>
+            <td>
+                <form align="center" size="+1" th:action="@{'/admin/edit/' + ${user.userId}}">
+                    <input type="submit" value="edit"/>
+                </form>
+                <form align="center" size="+1" th:method="DELETE" th:action="@{'/admin/delete/' + ${user.userId}}">
+                    <input type="submit" value="delete">
+                </form>
+            </td>
+        </tr>
+
+    </table>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <a href="/admin/add"><font size="+2" color="#006400">Add new user</font></a>
+
+    <br>
+    <br>
+    <a href="/index"><font size="+2" color="#006400">Выйти</font></a>
+
+</div>
 </body>
 </html>
