@@ -1,51 +1,40 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
 <head>
     <meta charset="UTF-8">
-    <title>Login Form</title>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-
-
-    <link rel="stylesheet" href="css/style.css">
-
-
+    <title>Вход</title>
 </head>
-
 <body bgcolor="#00bfff">
 <div align="center">
-    <form class='login-form' th:action="@{/login}" method="POST">
+<div class="form">
+    <form  th:action="@{/login}" method= "POST">
         <br>
         <br>
         <br>
         <br>
         <br>
         <br>
+        <h2>Sign in</h2>
         <br>
         <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <div class="flex-row logo">
-            <h1>LOGO</h1>
+        <div class="form-group has-feedback">
+            <label>
+                <input type="text" class="form-control"  name="username" placeholder="Ваш логин"/>
+            </label>
         </div>
-        <div class="flex-row">
-            <input id="username" class='lf--input' placeholder='Your username' type='text'>
-        </div>
-        <div class="flex-row">
-            <input id="password" class='lf--input' placeholder='Your password' type='password'>
-        </div>
-        <br>
-        <input class='lf--submit' type='submit' value='Sign Up'>
+    <div class="form-group has-feedback">
+        <label>
+            <input type="password"  class="form-control" name="password" placeholder="Ваш ПАРОЛЬ" >
+        </label>
+    </div>
         <br>
         <br>
-        <br>
-        <a class='lf--forgot' href='#'>Already throwing balls? Log In</a>
+        <div class="form-group col-xs-offset-8 col-xs-4">
+    <button type="submit" class="btn btn-primary btn-block btn-flat"
+    >Войти</button>
+    </div>
     </form>
-
+</div>
 </div>
 </body>
 </html>
-
-
