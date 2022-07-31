@@ -2,7 +2,6 @@ package ru.kata.spring.boot_security.demo.configs;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configurers.userdetails.DaoAuthenticationConfigurer;
@@ -26,6 +25,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         this.userDetailsService = userDetailsService;
         this.successUserHandler = successUserHandler;
     }
+
     @Autowired
     protected void configureGlobalSecurity(AuthenticationManagerBuilder auf) throws Exception {
         DaoAuthenticationConfigurer<AuthenticationManagerBuilder, UserDetailsServiceImpl> u = auf.userDetailsService(userDetailsService);
@@ -37,7 +37,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf()
-                        .disable()
+                .disable()
                 .authorizeRequests()
                 .antMatchers("/user/**").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/admin/**").hasRole("ADMIN")
@@ -46,7 +46,6 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         http.formLogin()
                 .loginPage("/login")
                 .successHandler(successUserHandler)
-                //.defaultSuccessUrl("/")
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .permitAll();

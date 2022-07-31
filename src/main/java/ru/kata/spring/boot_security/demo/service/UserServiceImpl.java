@@ -15,35 +15,35 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
-    private  final UserDao userDao;
-    private  final RoleDao roleDao;
+    private final UserDao userDao;
+    private final RoleDao roleDao;
 
-   @Autowired
+    @Autowired
     public UserServiceImpl(UserDao userDao, RoleDao roleDao) {
         this.userDao = userDao;
         this.roleDao = roleDao;
     }
 
     @Override
-    public User getById(Long id) {
+    public User getUserById(Long id) {
         return userDao.getReferenceById(id);
     }
 
     @Override
-    public List<User> findAll() {
+    public List<User> findAllUser() {
         return userDao.findAll();
     }
 
     @Override
-    public void save(User user) {
+    public void saveUser(User user) {
         userDao.save(passwordCoder(user));
 
     }
 
     @Override
-    public void deleteById(long id) {
+    public void deleteUserById(long id) {
         userDao.deleteById(id);
 
     }
@@ -52,6 +52,7 @@ public class UserServiceImpl implements UserService{
     public User findByUsername(String username) {
         return userDao.findByUsername(username);
     }
+
     @PostConstruct
     @Override
     public void addUser() {
@@ -60,12 +61,12 @@ public class UserServiceImpl implements UserService{
         Set<Role> roles2 = new HashSet<>();
         roles2.add(roleDao.findById(1L).orElse(null));
         roles2.add(roleDao.findById(2L).orElse(null));
-        User user1 = new User(1L, "John", "Smith", "john@mail.us", 43, "user",
+        User user1 = new User(1L, "Артёмка", "Игнатьев", "ignatyev@mail.ru", 8, "младший",
                 "12345", roles1);
-        User user2 = new User(2L, "Peter", "Parker", "spy@gmail.com", 20, "admin",
-                "54321", roles2);
-        save(user1);
-        save(user2);
+        User user2 = new User(2L, "Артём", "Коннов", "konnov@gmail.com", 9, "старший",
+                "12345", roles2);
+        saveUser(user1);
+        saveUser(user2);
     }
 
     @Override
@@ -73,6 +74,7 @@ public class UserServiceImpl implements UserService{
         user.setPassword(passwordEncoder().encode(user.getPassword()));
         return user;
     }
+
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(11);
     }

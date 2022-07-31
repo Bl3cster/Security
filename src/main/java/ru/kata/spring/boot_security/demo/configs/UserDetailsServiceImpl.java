@@ -8,21 +8,23 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.dao.UserDao;
+
 @Transactional
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     UserDao userDao;
+
     @Autowired
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
     }
 
-   @Transactional(readOnly = true)
+    @Transactional(readOnly = true)
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         UserDetails user = userDao.findByUsername(userName);
-        if(user == null) {
+        if (user == null) {
             throw new UsernameNotFoundException("user not found");
         }
         return user;
