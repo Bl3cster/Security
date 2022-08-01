@@ -1,40 +1,32 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="/jquery/jquery.min.js"></script>
+    <script src="/popper/popper.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
     <meta charset="UTF-8">
     <title>Вход</title>
 </head>
-<body bgcolor="#00bfff">
+<body>
 <div align="center">
-<div class="form">
-    <form  th:action="@{/login}" method= "POST">
+    <div class="form">
         <br>
         <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <h2>Sign in</h2>
-        <br>
-        <br>
-        <div class="form-group has-feedback">
-            <label>
-                <input type="text" class="form-control"  name="username" placeholder="Ваш логин"/>
-            </label>
+        <div class="mx-auto mt-5" style="width: 300px;">
+            <h3 class="font-weight-bold">Please sign in</h3>
+            <form th:action="@{/login}" method="POST">
+                <div class="form-group">
+                    <input class="form-control" id="username" type="text" name="username" placeholder="Username"/>
+                    <input class="form-control" id="password" type="password" name="password" placeholder="Password"/>
+                </div>
+                <div class="form-group">
+                    <input class="btn btn-block btn-primary" type="submit" value="Sign in"/>
+                </div>
+            </form>
         </div>
-    <div class="form-group has-feedback">
-        <label>
-            <input type="password"  class="form-control" name="password" placeholder="Ваш ПАРОЛЬ" >
-        </label>
     </div>
-        <br>
-        <br>
-        <div class="form-group col-xs-offset-8 col-xs-4">
-    <button type="submit" class="btn btn-primary btn-block btn-flat"
-    >Войти</button>
-    </div>
-    </form>
-</div>
 </div>
 </body>
 </html>

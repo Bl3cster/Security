@@ -1,6 +1,8 @@
 package ru.kata.spring.boot_security.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -8,6 +10,7 @@ import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
+import java.security.Principal;
 import java.util.ArrayList;
 
 
@@ -23,9 +26,15 @@ public class AdminController {
         this.userService = userService;
         this.roleService = roleService;
     }
+@GetMapping("/admin/user")
+    public String getAdminUser(Model model, Authentication authentication) {
+        model.addAttribute("user", userService.findByUsername(authentication.getName()));
+        return "user-admin";
+    }
 
     @GetMapping(value = "/admin")
-    public String getAllUsers(Model model) {
+    public String getAllUsers(Model model, Authentication authentication) {
+        model.addAttribute("user", userService.findByUsername(authentication.getName()));
         model.addAttribute("users", userService.findAllUser());
         return "users";
     }
@@ -70,11 +79,4 @@ public class AdminController {
     public String createLoginPage() {
         return "login";
     }
-
-    @GetMapping("/index")
-    public String createIndexPage() {
-        return "index";
     }
-
-
-}

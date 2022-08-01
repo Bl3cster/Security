@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="/jquery/jquery.min.js"></script>
+    <script src="/popper/popper.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
     <meta charset="UTF-8">
     <title>Create new User</title>
 </head>
@@ -47,10 +52,136 @@
         <input type="submit" value="Creat User"/>
         <br>
         <br>
-        <a href="/index"><font size="+2" color="#006400">Выйти</font></a>
+        <a href="/login"><font size="+2" color="#006400">Выйти</font></a>
     </form>
 </div>
 </body>
+
+<body>
+<nav class="navbar navbar-dark bg-dark" align="left">
+    <font color="white">
+        <b th:text="${user.getUsername()}"></b>
+        <span> with Role: </span>
+        <span th:text="${user.getRoles()}"></span>
+    </font>
+    <font color="silver" align="right">
+        <a href="/login"><font color="silver">logout</font></a>
+    </font>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2 bg-white">
+            <div class="col-md-2 bg-white">
+                <div class="d-grid gap-2">
+                    <a class="btn btn-primary btn-block" role="button" href="/admin">Admin</a>
+                    <a class="btn btn-link btn-block" role="button" href="/admin/user">User</a>
+                </div>
+        </div>
+        <div class="col-md-10 bg-light">
+
+            <h2>Admin panel</h2>
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/admin">Users table</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/add">New User</a>
+                </li>
+            </ul>
+
+            <h4>All Users</h4>
+            <table class="table table-striped">
+
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Email</th>
+                    <th>Age</th>
+                    <th>Username</th>
+                    <th>Role</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="user : ${users}">
+                    <td align="center" size="+2" th:utext="${user.userId}">Id</td>
+                    <td align="center" size="+2" th:utext="${user.name}">Name</td>
+                    <td align="center" size="+2" th:utext="${user.surname}">Surname</td>
+                    <td align="center" size="+2" th:utext="${user.email}">Email</td>
+                    <td align="center" size="+2" th:utext="${user.age}">Age</td>
+                    <td align="center" size="+2" th:utext="${user.username}">Username</td>
+                    <td align="center" size="+2" th:utext="${user.roles}">Role</td>
+                    <td>
+                        <form align="center" size="+1" th:action="@{'/admin/edit/' + ${user.userId}}">
+                            <input type="submit" class="btn btn-primary btn-sm" value="edit"/>
+                        </form>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                            Edit
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal" id="${user.userId}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        ...
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <form align="center" size="+1" th:method="DELETE"
+                              th:action="@{'/admin/delete/' + ${user.userId}}">
+                            <input type="submit" class="btn btn-danger btn-sm" value="delete">
+                        </form>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                            Launch demo modal
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        ...
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+
 </html>
 
 
