@@ -9,7 +9,6 @@ public interface RoleService {
 
     List<Role> findAllRole();
 
-    void addRole();
 
     Set<Role> findByIdRoles(List<Long> roles);
 }

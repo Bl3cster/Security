@@ -32,47 +32,47 @@ public class AdminController {
 
 
     @GetMapping(value = "/admin/add")
-    public String newUser(@ModelAttribute("user") User user, Model model) {
+    public String getUserCreateForm(@ModelAttribute("user") User user, Model model) {
         model.addAttribute("roles", roleService.findAllRole());
         return "new";
     }
 
     @PostMapping(value = "/admin/add")
-    public String create(@RequestParam("role") ArrayList<Long> roles,
-                         @ModelAttribute("user") User user) {
+    public String createNewUser(@RequestParam("role") ArrayList<Long> roles,
+                                @ModelAttribute("user") User user) {
         user.setRoles(roleService.findByIdRoles(roles));
         userService.saveUser(user);
         return "redirect:/admin";
     }
 
     @GetMapping(value = "/admin/edit/{id}")
-    public String edit(Model model, @PathVariable("id") Long id) {
+    public String createUserFormEdit(Model model, @PathVariable("id") Long id) {
         model.addAttribute("user", userService.getUserById(id));
         model.addAttribute("roles", roleService.findAllRole());
         return "edit";
     }
 
     @PostMapping(value = "/admin/edit")
-    public String update(@RequestParam("role") ArrayList<Long> roles,
-                         @ModelAttribute("user") User user) {
+    public String saveUpdateUser(@RequestParam("role") ArrayList<Long> roles,
+                                 @ModelAttribute("user") User user) {
         user.setRoles(roleService.findByIdRoles(roles));
         userService.saveUser(user);
         return "redirect:/admin";
     }
 
     @DeleteMapping(value = "/admin/delete/{id}")
-    public String delete(@PathVariable("id") int id) {
+    public String deleteUser(@PathVariable("id") int id) {
         userService.deleteUserById(id);
         return "redirect:/admin";
     }
 
     @GetMapping("/login")
-    public String pageLogin() {
+    public String createLoginPage() {
         return "login";
     }
 
     @GetMapping("/index")
-    public String pageIndex() {
+    public String createIndexPage() {
         return "index";
     }
 

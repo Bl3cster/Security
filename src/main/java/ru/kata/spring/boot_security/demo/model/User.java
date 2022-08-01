@@ -18,16 +18,13 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
-
     private String name;
     private String surname;
     private String email;
     private int age;
-
     @NotEmpty(message = "Username cannot be empty")
     @Size(min = 4, message = "min 4 latin characters")
     private String username;
-
     @NotEmpty(message = "Password can not be empty")
     private String password;
 
@@ -40,6 +37,19 @@ public class User implements UserDetails {
 
     public User() {
     }
+
+    public User(Long userId, String name, String surname, String email, int age, String username, String password,
+                Set<Role> roles) {
+        this.userId = userId;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.age = age;
+        this.username = username;
+        this.password = password;
+        this.roles = roles;
+    }
+
 
     public Long getUserId() {
         return userId;
@@ -85,6 +95,26 @@ public class User implements UserDetails {
         return username;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public boolean isAccountNonExpired() {
         return true;
@@ -105,41 +135,9 @@ public class User implements UserDetails {
         return true;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles();
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
-
-    public User(Long userId, String name, String surname, String email, int age, String username, String password,
-                Set<Role> roles) {
-        this.userId = userId;
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.age = age;
-        this.username = username;
-        this.password = password;
-        this.roles = roles;
     }
 
     @Override
