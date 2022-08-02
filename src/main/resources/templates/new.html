@@ -9,54 +9,6 @@
     <meta charset="UTF-8">
     <title>Create new User</title>
 </head>
-<body bgcolor="#00bfff">
-<div align="center">
-    <h2>CREAT NEW USERS</h2>
-    <br>
-    <br>
-    <form action="#" th:method="POST" th:action="@{/admin/add}" th:object="${user}">
-
-        <table border="1" style="background-color: gold;" cellspacing="7">
-            <tr>
-                <th th:width="200"><label for="name">Enter name: </label></th>
-                <th th:width="200"><label for="surname">Enter surname: </label></th>
-                <th th:width="200"><label for="email">Enter email: </label></th>
-                <th th:width="70"><label for="age">Enter age: </label></th>
-                <th th:width="200"><label for="username">Enter username</label></th>
-                <th th:widnth="300"><label for="password">Enter password</label></th>
-                <th th:width="150">Select Role:</th>
-            </tr>
-            <input type="hidden" th:field="*{userId}" th:value="user.userId">
-            <tr>
-                <td><input type="text" th:field="*{name}" id="name"/>
-                </td>
-                <td><input type="text" th:field="*{surname}" id="surname"/></td>
-
-                <td><input type="text" th:field="*{email}" id="email"/></td>
-
-                <td><input type="text" th:field="*{age}" id="age"/></td>
-
-                <td><input type="text" th:field="*{username}" id="username"></td>
-
-                <td><input type="text" th:field="*{password}" id="password"></td>
-                <td><label>
-                    <select size="2" multiple name="role" required="required">
-                        <option selected="selected" value="1">User</option>
-                        <option value="2">Admin</option>
-                    </select>
-                </label></td>
-            </tr>
-        </table>
-        <br>
-        <br>
-        <input type="submit" value="Creat User"/>
-        <br>
-        <br>
-        <a href="/login"><font size="+2" color="#006400">Выйти</font></a>
-    </form>
-</div>
-</body>
-
 <body>
 <nav class="navbar navbar-dark bg-dark" align="left">
     <font color="white">
@@ -71,112 +23,66 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-2 bg-white">
-            <div class="col-md-2 bg-white">
-                <div class="d-grid gap-2">
-                    <a class="btn btn-primary btn-block" role="button" href="/admin">Admin</a>
-                    <a class="btn btn-link btn-block" role="button" href="/admin/user">User</a>
-                </div>
+            <div class="d-grid gap-2">
+                <a class="btn btn-primary btn-block" role="button" href="/admin">Admin</a>
+                <a class="btn btn-link btn-block" role="button" href="/admin/user">User</a>
+            </div>
         </div>
         <div class="col-md-10 bg-light">
 
             <h2>Admin panel</h2>
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" href="/admin">Users table</a>
+                    <a class="nav-link" href="/admin">Users table</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin/add">New User</a>
+                    <a class="nav-link active" href="/admin/add">New User</a>
                 </li>
             </ul>
-
-            <h4>All Users</h4>
-            <table class="table table-striped">
-
-                <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Surname</th>
-                    <th>Email</th>
-                    <th>Age</th>
-                    <th>Username</th>
-                    <th>Role</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
-                </thead>
-
-                <tbody>
-                <tr th:each="user : ${users}">
-                    <td align="center" size="+2" th:utext="${user.userId}">Id</td>
-                    <td align="center" size="+2" th:utext="${user.name}">Name</td>
-                    <td align="center" size="+2" th:utext="${user.surname}">Surname</td>
-                    <td align="center" size="+2" th:utext="${user.email}">Email</td>
-                    <td align="center" size="+2" th:utext="${user.age}">Age</td>
-                    <td align="center" size="+2" th:utext="${user.username}">Username</td>
-                    <td align="center" size="+2" th:utext="${user.roles}">Role</td>
-                    <td>
-                        <form align="center" size="+1" th:action="@{'/admin/edit/' + ${user.userId}}">
-                            <input type="submit" class="btn btn-primary btn-sm" value="edit"/>
-                        </form>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                            Edit
-                        </button>
-
-                        <!-- Modal -->
-                        <div class="modal" id="${user.userId}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        ...
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <form align="center" size="+1" th:method="DELETE"
-                              th:action="@{'/admin/delete/' + ${user.userId}}">
-                            <input type="submit" class="btn btn-danger btn-sm" value="delete">
-                        </form>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                            Launch demo modal
-                        </button>
-
-                        <!-- Modal -->
-                        <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        ...
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+            <h4>Add new User</h4>
+            <form action="#" th:method="POST" th:action="@{/admin/add}" th:object="${user}">
+                <div class="mx-auto mt-5" style="width: 300px;">
+                    <div>
+                        <label>FirstName</label>
+                        <input required type="text" class="form-control"
+                               th:field="*{name}" id="name"/>
+                    </div>
+                    <div>
+                        <label>LastName</label>
+                        <input required type="text" class="form-control"
+                               th:field="*{surname}" id="surname"/>
+                    </div>
+                    <div>
+                        <label>Email</label>
+                        <input type="text" class="form-control" th:field="*{email}" id="email"/>
+                    </div>
+                    <div>
+                        <label>Age</label>
+                        <input type="text" class="form-control" th:field="*{age}" id="age"/>
+                    </div>
+                    <div>
+                        <label>Username</label>
+                        <input type="text" class="form-control"
+                               th:field="*{username}" id="username">
+                    </div>
+                    <div>
+                        <label>Password</label>
+                        <input type="text" class="form-control"
+                               th:field="*{password}" id="password">
+                    </div>
+                    <div>
+                        <label>Role</label>
+                        <select style="width: 300px;" size="2" multiple name="role" required="required">
+                            <option selected="selected" value="1">User</option>
+                            <option value="2">Admin</option>
+                        </select>
+                    </div>
+                    <br>
+                    <div align="center">
+                    <input type="submit" value="Add new User" class="btn btn-success"/>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
