@@ -66,59 +66,10 @@
                     <td align="center" size="+2" th:utext="${user.username}">Username</td>
                     <td align="center" size="+2" th:utext="${user.roles}">Role</td>
                     <td>
-                        <form align="center" size="+1" th:action="@{'/admin/edit/' + ${user.userId}}">
-                            <input type="submit" class="btn btn-primary btn-sm" value="edit"/>
-                        </form>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#userEditModal">
+                            Edit
+                        </button>
 
-                        <div class="modal fade" id="userEditModal" tabindex="-1" role="dialog" aria-labelledby="userEditModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <form id="userEditForm">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="userEditModalLabel">Edit user</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <fieldset class="mx-auto text-center">
-                                                <div class="form-group">
-                                                    <label for="edit_id">Id</label>
-                                                    <input id="edit_id" class="form-control" type="text" name="id" readonly />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="edit_name">Name</label>
-                                                    <input id="edit_name" class="form-control" type="text" name="name" />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="edit_username">Username</label>
-                                                    <input id="edit_username" class="form-control" type="text" name="username" />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="edit_password">Password</label>
-                                                    <input id="edit_password" class="form-control" type="password" name="password" />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="edit_roles">Roles</label>
-                                                    <select id="edit_roles" class="form-control" name="roles" size="2" multiple required>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="form-check">
-                                                        <input id="edit_enabled" class="form-check-input" type="checkbox" name="enabled">
-                                                        <label class="form-check-label" for="edit_enabled">Enabled</label>
-                                                    </div>
-                                                </div>
-                                            </fieldset>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary">Save changes</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
                     </td>
                     <td>
                         <form align="center" size="+1" th:method="DELETE"
@@ -132,5 +83,77 @@
         </div>
     </div>
 </div>
+
+
+<div class="modal fade" id="userEditModal" tabindex="-1"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form id="editUserForm">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit user</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body mx-auto col-7 text-center">
+
+                    <div>
+                        <label for="editId" class="fw-bold pb-0 pt-2">Id</label>
+                        <input readonly type="text" class="form-control" id="editId"
+                               name="id">
+                    </div>
+                    <div>
+                        <label for="editFirstName" class="fw-bold pb-0 pt-2">FirstName</label>
+                        <input required type="text" class="form-control"
+                               id="editFirstName" name="firstName">
+                    </div>
+                    <div>
+                        <label for="editLastName"
+                               class="fw-bold pb-0 pt-2">LastName</label>
+                        <input required type="text" class="form-control"
+                               id="editLastName" name="lastName">
+                    </div>
+                    <div>
+                        <label for="editEmail" class="fw-bold pb-0 pt-2">Email</label>
+                        <input type="email" class="form-control" id="editEmail"
+                               name="email">
+                    </div>
+                    <div>
+                        <label for="editAge" class="fw-bold pb-0 pt-2">Age</label>
+                        <input type="number" class="form-control" id="editAge"
+                               name="age">
+                    </div>
+                    <div>
+                        <label for="editPassword"
+                               class="fw-bold pb-0 pt-2">Password</label>
+                        <input type="password" class="form-control"
+                               id="editPassword" name="password">
+                    </div>
+                    <div>
+                        <label for="editRoles" class="fw-bold pb-0 pt-2">Role</label>
+                        <select class="form-control" id="editRoles" multiple
+                                name="selectedRoles" size="2"><option selected="selected" value="1">User</option>
+                            <option value="2">Admin</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm"
+                            data-bs-dismiss="modal">Close
+                    </button>
+                    <button type="submit" class="btn btn-primary btn-sm">Edit</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="tbl.js"></script>
+
+
+<script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
