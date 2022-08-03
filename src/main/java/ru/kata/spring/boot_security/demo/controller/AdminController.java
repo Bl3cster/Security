@@ -59,7 +59,7 @@ public class AdminController {
         return "edit";
     }
 
-    @PostMapping(value = "/admin/edit")
+    @PatchMapping(value = "/admin/edit")
     public String saveUpdateUser(@RequestParam("role") ArrayList<Long> roles,
                                  @ModelAttribute("user") User user) {
         user.setRoles(roleService.findByIdRoles(roles));
