@@ -63,8 +63,9 @@
                     <td align="center" size="+2" th:utext="${user.username}">Username</td>
                     <td align="center" size="+2" th:utext="${user.roles}">Role</td>
                     <td>
-                        <a type="button" class="btn btn-info text-white" data-bs-toggle="modal"
-                           th:data-target="${'#editModal'+user.userId}">Edit</a>
+                        <button type="button" class="btn btn-info text-white" data-toggle="modal"
+                                th:data-target="${'#editModal'+user.userId}">Edit
+                        </button>
 
                     </td>
                     <form th:method="PATCH"
@@ -81,9 +82,8 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <div class="align-items-center text-center mx-auto">
-                                            <br>
-                                            <div class="col">
+                                        <div class="mx-auto mt-5" style="width: 200px;">
+                                            <div>
                                                 <label th:for="${'userId' + user.userId}"
                                                        align="center"><b>UserId</b></label>
                                                 <input name="userId" th:type="text"
@@ -92,51 +92,52 @@
                                                        th:value="${user.userId}" readonly/>
                                             </div>
                                             <div>
-                                                <label th:for="${'name' + user.name}">FirstName</label>
+                                                <label th:for="${'name' + user.name}"><b>FirstName</b></label>
                                                 <input th:type="text" class="form-control"
                                                        th:id="${'name' + user.userId}"
                                                        th:value="${user.name}" name="name"/>
                                             </div>
                                             <div>
-                                                <label th:for="${'surname' + user.surname}">LastName</label>
+                                                <label th:for="${'surname' + user.surname}"><b>LastName</b></label>
                                                 <input th:type="text" class="form-control" name="surname"
                                                        th:value="${user.surname}" th:id="${'surname' + user.userId}"/>
                                             </div>
                                             <div>
-                                                <label th:for="${'email' + user.email}">Email</label>
+                                                <label th:for="${'email' + user.email}"><b>Email</b></label>
                                                 <input th:type="text" class="form-control" name="email"
                                                        th:value="${user.email}"
                                                        th:id="${'email' + user.userId}"/>
                                             </div>
                                             <div>
-                                                <label th:for="${'age' + user.age}">Age</label>
+                                                <label th:for="${'age' + user.age}"><b>Age</b></label>
                                                 <input th:type="number" class="form-control" name="age"
                                                        th:value="${user.age}"
                                                        th:id="${'age' + user.userId}"/>
                                             </div>
                                             <div>
-                                                <label th:for="${'username' + user.username}">Username</label>
+                                                <label th:for="${'username' + user.username}"><b>Username</b></label>
                                                 <input type="text" class="form-control" name="username"
                                                        th:value="${user.username}" th:id="${'username' + user.userId}">
                                             </div>
                                             <div>
-                                                <label th:for="${'password' + user.password}">Password</label>
+                                                <label th:for="${'password' + user.password}"><b>Password</b></label>
                                                 <input th:type="text" class="form-control" name="password"
                                                        th:value="${user.password}" th:id="${'password' +user.userId}">
                                             </div>
                                             <div>
-                                                <label th:for="${'role' + user.roles}">Role</label>
-                                                <select size="2" multiple name="role" required="required" id="role">
+                                                <label th:for="${'role' + user.roles}"><b>Role</b></label>
+                                                <select style="width: 200px;" size="2" multiple name="role"
+                                                        required="required" id="role">
                                                     <option selected="selected" value="1">User</option>
                                                     <option value="2">Admin</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary btn-sm"
+                                            <button type="button" class="btn btn-secondary"
                                                     data-bs-dismiss="modal">Close
                                             </button>
-                                            <button type="submit" class="btn btn-primary btn-sm">Edit</button>
+                                            <button type="submit" class="btn btn-primary">Edit</button>
                                         </div>
                                     </div>
                                 </div>
@@ -145,11 +146,88 @@
                     </form>
 
                     <td>
-                        <form align="center" size="+1" th:method="DELETE"
-                              th:action="@{'/admin/delete/' + ${user.userId}}">
-                            <input type="submit" class="btn btn-danger btn-sm" value="delete">
-                        </form>
+                        <button type="button" class="btn btn-danger" data-toggle="modal"
+                                th:data-target="${'#editDelete'+ user.userId}">
+                            Delete
+                        </button>
                     </td>
+                    <form th:method="DELETE"
+                          th:align="center"
+                          th:action="@{/admin/delete/{id}(id=${user.userId})}">
+                        <div class="modal fade" th:id="${'editDelete'+ user.userId}" tabindex="-1" role="dialog"
+                             aria-labelledby="editDelete" aria-hidden="true">
+                            <div class="modal-dialog" modal-dialog-centered role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="editDeleteLabel">Delete user</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="mx-auto mt-5" style="width: 200px;">
+                                            <div>
+                                                <label th:for="${'userId' + user.userId}"
+                                                       align="center"><b>UserId</b></label>
+                                                <input name="userId" th:type="text"
+                                                       class="form-control"
+                                                       th:id="${'userId' + user.userId}"
+                                                       th:value="${user.userId}" readonly/>
+                                            </div>
+                                            <div>
+                                                <label th:for="${'name' + user.name}"><b>FirstName</b></label>
+                                                <input th:type="text" class="form-control"
+                                                       th:id="${'name' + user.userId}"
+                                                       th:value="${user.name}" readonly/>
+                                            </div>
+                                            <div>
+                                                <label th:for="${'surname' + user.surname}"><b>LastName</b></label>
+                                                <input th:type="text" class="form-control" th:value="${user.surname}"
+                                                       th:id="${'surname' + user.userId}" readonly/>
+                                            </div>
+                                            <div>
+                                                <label th:for="${'email' + user.email}"><b>Email</b></label>
+                                                <input th:type="text" class="form-control"
+                                                       th:value="${user.email}"
+                                                       th:id="${'email' + user.userId}" readonly/>
+                                            </div>
+                                            <div>
+                                                <label th:for="${'age' + user.age}"><b>Age</b></label>
+                                                <input th:type="number" class="form-control"
+                                                       th:value="${user.age}"
+                                                       th:id="${'age' + user.userId}" readonly/>
+                                            </div>
+                                            <div>
+                                                <label th:for="${'username' + user.username}"><b>Username</b></label>
+                                                <input type="text" class="form-control" th:value="${user.username}"
+                                                       th:id="${'username' + user.userId}" readonly>
+                                            </div>
+                                            <div>
+                                                <label th:for="${'password' + user.password}"><b>Password</b></label>
+                                                <input th:type="text" class="form-control" th:value="${user.password}"
+                                                       th:id="${'password' +user.userId}" readonly/>
+                                            </div>
+                                            <div>
+                                                <label th:for="${'role' + user.roles}"><b>Role</b></label>
+                                                <select style="width: 200px;" size="2" multiple required="required"
+                                                        id="roles" disabled="true">
+                                                    <option selected="selected" value="1">User</option>
+                                                    <option value="2">Admin</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary btn"
+                                                    data-bs-dismiss="modal">Close
+                                            </button>
+                                            <button type="submit" class="btn btn-danger btn">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
                 </tr>
                 </tbody>
             </table>
