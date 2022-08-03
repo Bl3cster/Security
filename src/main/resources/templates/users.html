@@ -64,7 +64,6 @@
                     <td align="center" size="+2" th:utext="${user.roles}">Role</td>
                     <td>
                         <a type="button" class="btn btn-info text-white" data-bs-toggle="modal"
-                           data-bs-target="#editModal"
                            th:data-bs-target="${'#editModal'+user.userId}">Edit</a>
 
                     </td>
@@ -83,7 +82,7 @@
 
 <form th:method="PATCH"
       th:align="center"
-      th:action="@{/admin/edit/{id}(id=${user.userId})}">
+      th:action="@{/admin/edit/}">
     <div class="modal fade" th:id="${'editModal'+user.userId}" tabindex="-1" role="dialog"
          aria-labelledby="editModalLabel" aria-hidden="true">
         <div class="modal-dialog" modal-dialog-centered role="document">
