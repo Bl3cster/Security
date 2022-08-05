@@ -1,6 +1,6 @@
 package ru.kata.spring.boot_security.demo.initUserAndRole;
 
-public interface initUserAndRole {
+public interface Init {
 
     void addRole();
 

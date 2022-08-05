@@ -1,4 +1,4 @@
-package ru.kata.spring.boot_security.demo.config;
+package ru.kata.spring.boot_security.demo.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -9,26 +9,25 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import ru.kata.spring.boot_security.demo.service.UserDetailsServiceImpl;
+import ru.kata.spring.boot_security.demo.service.UserService;
 
 @Configuration
 @EnableWebSecurity
-
 public class WebSecurity extends WebSecurityConfigurerAdapter {
     private final SuccessUserHandler successUserHandler;
 
-    private final UserDetailsServiceImpl userDetailsService;
+    private final UserService userService;
 
     @Autowired
-    public WebSecurity(@Qualifier("userDetailsServiceImpl") UserDetailsServiceImpl userDetailsService,
+    public WebSecurity(UserService userService,
                        SuccessUserHandler successUserHandler) {
-        this.userDetailsService = userDetailsService;
+        this.userService = userService;
         this.successUserHandler = successUserHandler;
     }
 
     @Autowired
     protected void configureGlobalSecurity(AuthenticationManagerBuilder auf) throws Exception {
-        DaoAuthenticationConfigurer<AuthenticationManagerBuilder, UserDetailsServiceImpl> u = auf.userDetailsService(userDetailsService);
+        DaoAuthenticationConfigurer<AuthenticationManagerBuilder, UserService> u = auf.userDetailsService(userService);
         u.passwordEncoder(new BCryptPasswordEncoder(11));
 
     }

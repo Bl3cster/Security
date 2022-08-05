@@ -9,6 +9,7 @@ import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 
 
@@ -25,7 +26,7 @@ public class AdminController {
         this.userService = userService;
         this.roleService = roleService;
     }
-@GetMapping("/admin/user")
+    @GetMapping("/admin/user")
     public String getAdminUser(Model model, Authentication authentication) {
         model.addAttribute("user", userService.findByUsername(authentication.getName()));
         return "user-admin";
@@ -49,7 +50,11 @@ public class AdminController {
     public String createNewUser(@RequestParam("role") ArrayList<Long> roles,
                                 @ModelAttribute("user") User user) {
         user.setRoles(roleService.findByIdRoles(roles));
-        userService.saveUser(user);
+        try {
+            userService.saveUser(user);
+        } catch (Exception e) {
+            return "redirect:/admin";
+        }
         return "redirect:/admin";
     }
 
@@ -64,7 +69,11 @@ public class AdminController {
     public String saveUpdateUser(@RequestParam("role") ArrayList<Long> roles,
                                  @ModelAttribute("user") User user) {
         user.setRoles(roleService.findByIdRoles(roles));
-        userService.saveUser(user);
+        try {
+            userService.saveUser(user);
+        } catch (Exception e) {
+            return "redirect:/admin";
+        }
         return "redirect:/admin";
     }
 
@@ -78,4 +87,4 @@ public class AdminController {
     public String createLoginPage() {
         return "login";
     }
-    }
+}

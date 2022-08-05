@@ -23,6 +23,7 @@ public class User implements UserDetails {
     private String email;
     private int age;
     @NotEmpty(message = "Username cannot be empty")
+    @Column(unique = true)
     @Size(min = 4, message = "min 4 latin characters")
     private String username;
     @NotEmpty(message = "Password can not be empty")
