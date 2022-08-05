@@ -10,7 +10,7 @@ import javax.annotation.PostConstruct;
 import java.util.HashSet;
 import java.util.Set;
 
-public class InitImpl implements initUserAndRole {
+public class InitImpl implements Init {
 
     private final RoleRepository roleRepository;
     private final UserService userService;
